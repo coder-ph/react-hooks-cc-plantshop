@@ -1,17 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
+import Search from "./Search";
 
-function PlantCard() {
+function PlantCard({image, id, name, price}) {
+  const[isAvailable, setIsAvailable] = useState(true)
+
+  function handleChangeAvaolable(){
+    setIsAvailable(!isAvailable)
+  }
   return (
-    <li className="card" data-testid="plant-item">
-      <img src={"https://via.placeholder.com/400"} alt={"plant name"} />
-      <h4>{"plant name"}</h4>
-      <p>Price: {"plant price"}</p>
-      {true ? (
-        <button className="primary">In Stock</button>
-      ) : (
-        <button>Out of Stock</button>
-      )}
-    </li>
+    <>
+      <li className="card" data-testid="plant-item">
+        <img src={image} alt={name} />
+        <h4>{name}</h4>
+        <p>Price: {price}</p>
+        {isAvailable ? (
+          <button onClick={handleChangeAvaolable} className="primary">
+            In Stock
+          </button>
+        ) : (
+          <button onClick={handleChangeAvaolable}>Out of Stock</button>
+        )}
+      </li>
+    </>
   );
 }
 
